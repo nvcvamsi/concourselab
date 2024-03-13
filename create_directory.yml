@@ -1,0 +1,11 @@
+---
+- name: Create directory under /tmp
+  hosts: your_target_hosts
+  become: yes  # This ensures that Ansible will use sudo to execute commands as root
+
+  tasks:
+    - name: Create directory
+      file:
+        path: "/tmp/example_directory"
+        state: directory
+        mode: "0755"  # Set the permissions for the directory
