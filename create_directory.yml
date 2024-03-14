@@ -1,6 +1,6 @@
 ---
 - name: Create directory under /tmp
-  hosts: ansibleserver
+  hosts: ansiblemaster
   become: yes  # This ensures that Ansible will use sudo to execute commands as root
 
   tasks:
