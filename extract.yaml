@@ -2,7 +2,7 @@
   hosts: ansiblemaster
   tasks:
     - name: Get API key from kubeconfig
-      community.kubernetes.k8s_auth_info:
+      k8s_auth_info:
         kubeconfig: /tmp/config
         extract: api_key
       register: api_key_result
