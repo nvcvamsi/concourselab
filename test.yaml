@@ -1,11 +1,10 @@
-- hosts: ansiblemaster
-  gather_facts: false
+- name: Create namespaces in kubernetes cluster
+  hosts: ansiblemaster
+
   tasks:
-   - name: Create a k8s namespace
-     kubernetes.core.k8s_auth:
-      kubeconfig: '/tmp/config'
-      name: kube-system
+  - name: Create namespace in default Kubernetes cluster
+    kubernetes.core.k8s:
+      name: "kube-system"
       api_version: v1
       kind: Namespace
-      state: present
       state: present
