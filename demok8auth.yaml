@@ -1,5 +1,5 @@
 - name: Demo Ansible
-  hosts: k8s-master-nodes
+  hosts: ansiblemaster
   gather_facts: no
   tasks:
   - name: Get K8S_AUTH_KUBECONFIG
