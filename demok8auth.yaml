@@ -1,0 +1,18 @@
+- name: Demo Ansible
+  hosts: k8s-master-nodes
+  gather_facts: no
+  tasks:
+  - name: Get K8S_AUTH_KUBECONFIG
+    set_fact:
+      k8s_auth_kubeconfig: "{{ lookup('env', 'K8S_AUTH_KUBECONFIG') }}"
+  - debug: var=k8s_auth_kubeconfig
+  - name: Get K8S_AUTH_KUBECONFIG contents
+    set_fact:
+      kubeconfig_contents: "{{ lookup('file', k8s_auth_kubeconfig) | from_yaml }}"
+  - debug: msg="{{ kubeconfig_contents["current-context"] }}"
+  - name: Create Namespace
+    k8s:
+      api_version: v1
+      kind: Namespace
+      name: ansible-demo
+      state: present
