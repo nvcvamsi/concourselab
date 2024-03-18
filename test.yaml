@@ -1,10 +1,17 @@
-- name: Create namespace in target Kubernetes cluster
-  kubernetes.core.k8s:
-    state: present
-    kubeconfig: "/tmp/config"
-    kind: Namespace
-    name: kube-system
-    definition:
-      metadata:
-        labels:
-          backuptype: bkp
+- name: Demo Ansible
+  hosts: ansiblemaster
+  tasks:
+  - name: Create namespace in target Kubernetes cluster
+    - name: Log in (obtain access token)
+      k8s_auth:
+        username: kubernetes-admin
+        password: "{{ k8s_admin_password }}"
+      register: k8s_auth_results
+
+    # Previous task provides the token/api_key, while all other parameters
+    # are taken from module_defaults
+    - name: Get a list of all pods from any namespace
+      k8s_info:
+        api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+        kind: Pod
+      register: pod_list
