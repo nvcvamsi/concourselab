@@ -4,6 +4,7 @@
     - include_vars: secret.yaml
     - name: Log in (obtain access token)
       k8s_auth:
+        host: https://192.168.86.2:32000/
         username: kubernetes-admin
         password: "{{ k8s_admin_password }}"
         validate_certs: false
