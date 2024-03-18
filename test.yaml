@@ -1,10 +1,10 @@
-- name: Create namespaces in kubernetes cluster
-  hosts: ansiblemaster
-
-  tasks:
-  - name: Create namespace in default Kubernetes cluster
-    kubernetes.core.k8s:
-      name: "kube-system"
-      api_version: v1
-      kind: Namespace
-      state: present
+- name: Create namespace in target Kubernetes cluster
+  kubernetes.core.k8s:
+    state: present
+    kubeconfig: "/tmp/config"
+    kind: Namespace
+    name: kube-system
+    definition:
+      metadata:
+        labels:
+          backuptype: bkp
