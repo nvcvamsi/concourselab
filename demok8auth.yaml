@@ -10,9 +10,8 @@
     set_fact:
       kubeconfig_contents: "{{ lookup('file', k8s_auth_kubeconfig) | from_yaml }}"
   - debug: msg="{{ kubeconfig_contents["current-context"] }}"
-  - name: Create Namespace
-    k8s:
-      api_version: v1
-      kind: Namespace
-      name: ansible-demo
-      state: present
+  - name: Search for all running pods
+  kubernetes.core.k8s_info:
+    kind: Pod
+    field_selectors:
+      - status.phase=Running
