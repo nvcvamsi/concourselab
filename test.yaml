@@ -1,7 +1,7 @@
 - name: Demo Ansible
   hosts: ansiblemaster
   tasks:
-    - include_vars: secret.yml
+    - include_vars: secret.yaml
     - name: Log in (obtain access token)
       k8s_auth:
         username: kubernetes-admin
